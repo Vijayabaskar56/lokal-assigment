@@ -13,6 +13,8 @@ import { useColorScheme } from 'react-native';
 SplashScreen.preventAutoHideAsync();
 
 import { tamaguiConfig } from '../../tamagui.config'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'expo-status-bar';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -39,12 +41,15 @@ export default function RootLayout() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <QueryClientProvider client={queryClient}>
-      <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      </TamaguiProvider>
+        <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
+          <SafeAreaProvider style={{ flex: 1 }}>
+            <StatusBar style="auto" translucent={false} />
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </SafeAreaProvider>
+        </TamaguiProvider>
       </QueryClientProvider>
     </ThemeProvider>
   );
