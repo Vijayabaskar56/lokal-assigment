@@ -2,29 +2,30 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native
 import { useFonts } from 'expo-font';
 import { Stack, usePathname } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { StatusBar } from 'expo-status-bar';
 
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TamaguiProvider } from 'tamagui';
 import { useColorScheme } from 'react-native';
+import { useEffect } from 'react';
+import 'react-native-reanimated';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 import { tamaguiConfig } from '../../tamagui.config'
+import { BookMarkProvider } from '@/store/async-store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { StatusBar } from 'expo-status-bar';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+  // tamaguiconfig
   const [loaded] = useFonts({
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
   const currentPath = usePathname();
-  console.log(currentPath);
-
+  // react-query
   const queryClient = new QueryClient()
 
   useEffect(() => {
@@ -43,11 +44,13 @@ export default function RootLayout() {
       <QueryClientProvider client={queryClient}>
         <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
           <SafeAreaProvider style={{ flex: 1 }}>
+          <BookMarkProvider>
             <StatusBar style="auto" translucent={false} />
             <Stack>
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="+not-found" />
             </Stack>
+          </BookMarkProvider>
           </SafeAreaProvider>
         </TamaguiProvider>
       </QueryClientProvider>

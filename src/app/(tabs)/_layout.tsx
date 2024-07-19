@@ -1,23 +1,18 @@
 import { Tabs } from 'expo-router';
-import React from 'react';
-
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from 'react-native';
+import { accentColor } from '@/utils/utils';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
+        tabBarActiveTintColor: accentColor,
+        headerShown: true,
       }}
-      initialRouteName='jobs'
       >
       <Tabs.Screen
-        name="jobs"
+        name="(jobs)"
         options={{
           title: 'Jobs',
           tabBarIcon: ({ color, focused }) => (

@@ -1,27 +1,20 @@
 import { Stack } from "expo-router";
 import { View } from "tamagui";
 
-const EditProfileLayout = () => {
-  // console.log(session);
+const BookMarkLayout = () => {
   return (
     <View flex={1}>
-      <Stack screenOptions={{headerShown : false}}>
+      <Stack screenOptions={{headerShown : true}}>
         <Stack.Screen
           name="index"
           options={{
-            headerTitle: "Cart",
+            headerTitle: "BookMarks",
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="address"
-          options={{
-            headerTitle: "Address",
-          }}
-          />
       </Stack>
     </View>
   );
 };
 
-export default EditProfileLayout;
+export default BookMarkLayout;
