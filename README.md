@@ -16,5 +16,5 @@ Functional Requirements
 
 ## Here is a Video fo the demo of the application
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0;"><iframe src="https://www.loom.com/embed/f53c559fa84e4793be4b94bd4d779ce2?sid=3488dbbf-61c4-43e1-bcb8-f90b94fad248" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+[Quick Demo Video](https://www.loom.com/embed/f53c559fa84e4793be4b94bd4d779ce2?sid=3488dbbf-61c4-43e1-bcb8-f90b94fad248)
 
