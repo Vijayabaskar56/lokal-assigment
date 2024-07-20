@@ -4,8 +4,7 @@ import IconText from "./IconText";
 import { Collapsible } from "./Collabsables";
 import StyledButton from "./StyledButton";
 import { ScrollView } from "tamagui";
-import { storage } from "@/store/bookmark-store";
-import { handleBookmark } from "@/utils/handleBookmark";
+
 
 
 const JobDetails = ({ job, bookmark, setBookmark }: {
@@ -23,9 +22,6 @@ const JobDetails = ({ job, bookmark, setBookmark }: {
       <Text color='$blue11Light' fontSize='$8' textAlign='left'>
        {job?.primary_details?.Job_Type}
       </Text>
-      <ZStack top={0} left={-30} onPress={() => handleBookmark(setBookmark, job)}>
-       <Heart size={27} fill={bookmark?.includes(job?.id) ? "red" : "transparent"} />
-      </ZStack>
      </XStack>
      <>
       <Paragraph fontWeight='900' size='$6'>{job?.company_name ?? ""}</Paragraph>

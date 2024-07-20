@@ -26,17 +26,14 @@ export const BookMarkProvider = (props: React.PropsWithChildren) => {
   useEffect(() => {
     const unsubscribe = NetInfo.addEventListener((state) => {
       setIsConnected(state.isConnected);
-      if (state.isConnected === false) {
-        // Pseudo-code: Check if the current route is not "/book-marks" before navigating
-        ToastAndroid.show("No Internet Connection", ToastAndroid.BOTTOM);
-      }
-
-    });
+    })
+    if(!isConnected) {
+      ToastAndroid.show("No Internet Connection", ToastAndroid.BOTTOM);
+    }
     return () => {
       unsubscribe();
     }
   }, []);
-  console.log(isConnected, "isConnected" );
 
 
 

@@ -14,7 +14,6 @@ export default function HomeScreen() {
 
   const { data, isLoading, error, refetch, hasNextPage, isFetching, isRefetching, fetchNextPage } = useGetJobs();
   const dataArr = !error && data?.pages?.map(page => page?.results).flat() || [];
-  console.log(isConnected , "fron home");
 
   const onEndReached = () => {
     if (hasNextPage && !isLoading) {
@@ -43,7 +42,7 @@ export default function HomeScreen() {
       estimatedItemSize={200}
     /> : !isConnected ?
     (<View flex={1} justifyContent='center' alignItems='center'>
-      <Text textAlign='center'>Your are OffLine, Please Return to Online to View the Bookmakrs</Text>
+      <Text textAlign='center'>Your are Offline, Please Return to Online to View the Bookmakrs</Text>
     </View>) : (<View flex={1} justifyContent='center' alignItems='center'>
       <Text textAlign='center'>Something Went Wrong</Text>
     </View>)
