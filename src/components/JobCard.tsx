@@ -4,10 +4,10 @@ import { Link,  usePathname } from 'expo-router';
 import { Card, Paragraph, Separator, View, XStack, YStack, ZStack } from 'tamagui';
 import {  BookOpen, Briefcase, Clock4, Heart, MapPin, MessageCircle } from '@tamagui/lucide-icons';
 
-import { BlurView } from '@react-native-community/blur';
 import StyledButton from './StyledButton';
 import IconText from './IconText';
-import { storage, useBookMark } from '@/store/async-store';
+import { useBookMark } from '@/store/bookmark-store';
+import { handleBookmark } from '@/utils/handleBookmark';
 
 const JobCard = React.memo(({ item }: { item: any }) => {
   const {bookmark , setBookmark} = useBookMark();
@@ -16,7 +16,6 @@ const JobCard = React.memo(({ item }: { item: any }) => {
   return item.id && (
     <View>
       <Card elevate bordered
-        // animation="bouncy"
         width={400}
         height={360}
         borderRadius='$0'
@@ -30,13 +29,6 @@ const JobCard = React.memo(({ item }: { item: any }) => {
           pathname: path !== '/' ? `${path}/[id]` : '/[id]',
           params: { id: item?.id },
         }}>
-          <Card.Background>
-            <BlurView
-              style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
-              blurType="light"
-              blurAmount={10} // Adjust the blur amount to achieve the desired effect
-            />
-          </Card.Background>
           <Card.Header padded flex={3}>
             <XStack gap='$3'>
               <YStack gap='$2'>
@@ -61,24 +53,13 @@ const JobCard = React.memo(({ item }: { item: any }) => {
                 <Paragraph theme="alt1" color='$green10Dark' fontWeight='bold'>{item.salary_max && item.salary_min && `₹ ${item && item?.salary_max} - ₹ ${item?.salary_min}`}</Paragraph>
               </YStack>
             </XStack>
-              <ZStack top={-160} left={330} onPress={() => {
-                setBookmark((prev: any) => {
-                  const isIdPresent = prev?.includes(item?.id);
-                  const updatedArray = isIdPresent
-                    ? prev.filter((id: any) => id !== item?.id) //
-                    : [...prev, item?.id]; // Add the ID
-                  return updatedArray;
-                })
-                if (storage.contains(`${item?.id}`)) {
-                  storage.delete(`${item?.id}`);
-                } else {
-                  storage.set(`${item?.id}`, JSON.stringify(item));
-                }
-            }}>
+              <ZStack top={-160} left={330} onPress={() => handleBookmark(setBookmark , item)}>
                   <Heart size={27}  fill={bookmark?.includes(item?.id) ? "red" : "transparent"} />
               </ZStack>
           </Card.Header>
-          <Separator />
+          <View flex={1}>
+          <Separator flex={1} />
+          </View>
           <Card.Footer padded flex={2}>
             <XStack width={350} justifyContent='flex-start'>
               <YStack width={320} justifyContent='space-evenly' alignItems='flex-start' margin='$3' alignSelf='stretch' gap='$5' >

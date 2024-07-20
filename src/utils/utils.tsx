@@ -1,9 +1,6 @@
-/**
- * Below are the colors that are used in the app. The colors are defined in the light and dark mode.
- * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
- */
-
+// Definition: Helper functions and constants
 import JobCard from "@/components/JobCard";
+import { storage } from "@/store/bookmark-store";
 import { Spinner } from "tamagui";
 
 export const accentColor = "#ffb700";
@@ -14,8 +11,8 @@ export const renderItem = ({ item }: any) => <JobCard item={item} />
 export const KeyExtractor = (_: any, index: number) => index.toString();
 
 
-export const renderFooter = (isFetching : Boolean) : React.ReactNode => {
-  if (isFetching) {
+export const renderLoader = (isFetching: Boolean, isRefetching?: Boolean): React.ReactNode => {
+  if (isFetching && !isRefetching) {
     return <Spinner size="large" color="$accentColor" />
   }
   return null;

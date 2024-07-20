@@ -14,7 +14,7 @@ import 'react-native-reanimated';
 SplashScreen.preventAutoHideAsync();
 
 import { tamaguiConfig } from '../../tamagui.config'
-import { BookMarkProvider } from '@/store/async-store';
+import { BookMarkProvider } from '@/store/bookmark-store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 export default function RootLayout() {
@@ -45,7 +45,7 @@ export default function RootLayout() {
         <TamaguiProvider config={tamaguiConfig} defaultTheme={colorScheme!}>
           <SafeAreaProvider style={{ flex: 1 }}>
           <BookMarkProvider>
-            <StatusBar style="auto" translucent={false} />
+            <StatusBar style="auto" translucent={true} />
             <Stack>
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="+not-found" />

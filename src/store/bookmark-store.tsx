@@ -1,5 +1,5 @@
-import React from "react";
-import { MMKV, useMMKVString } from 'react-native-mmkv'
+import React, { useEffect } from "react";
+import { MMKV } from 'react-native-mmkv'
 
 
 export const storage = new MMKV()
@@ -17,7 +17,13 @@ export const useBookMark = () => {
 };
 
 export const BookMarkProvider = (props: React.PropsWithChildren) => {
-  const [bookmark, setBookmark] = React.useState([]);
+  const [bookmark, setBookmark] = React.useState<number[]>();
+
+  useEffect(() => {
+    if (!bookMark) {
+      setBookmark(storage.getAllKeys().map(Number))
+    }
+  }, [])
 
   return (<BookMarkContext.Provider value={{ bookmark, setBookmark }} {...props} >
     {props.children}

@@ -9,7 +9,7 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
  const theme = useColorScheme() ?? 'light';
 
  return (
-  <View>
+  <View flex={1}>
    <XStack width='100%' gap='$2' justifyContent='space-between' alignItems='center' onPress={() => setIsOpen((value) => !value)}>
     <Text  fontSize='$6' wordWrap="break-word" fontWeight='bold'>{title}</Text>
     <TouchableOpacity
@@ -21,7 +21,7 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
       color={accentColor} />
     </TouchableOpacity>
    </XStack>
-   {isOpen && <View>{children}</View>}
+   {isOpen && <View flex={1}>{children}</View>}
   </View>
  );
 }
