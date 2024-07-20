@@ -9,7 +9,9 @@ const JobDetailsView = () => {
   const { id } = useLocalSearchParams();
   const { bookmark, setBookmark } = useBookMark();
   const { data, isLoading } = useGetJobs();
+
   let CurrentJob;
+
   if (!isLoading && data) {
     CurrentJob = data?.pages?.map(page => page.results).flat().filter(jobs => {
       return jobs.id === parseInt(id as string);

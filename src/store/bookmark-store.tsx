@@ -1,5 +1,9 @@
+import { router, usePathname } from "expo-router";
 import React, { useEffect } from "react";
 import { MMKV } from 'react-native-mmkv'
+import * as NetInfo from '@react-native-community/netinfo';
+import { ToastAndroid } from "react-native";
+
 
 
 export const storage = new MMKV()
@@ -18,6 +22,20 @@ export const useBookMark = () => {
 
 export const BookMarkProvider = (props: React.PropsWithChildren) => {
   const [bookmark, setBookmark] = React.useState<number[]>();
+  const [isConnected, setIsConnected] = React.useState<boolean | null>(true);
+  useEffect(() => {
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      setIsConnected(state.isConnected);
+    })
+    if(!isConnected) {
+      ToastAndroid.show("No Internet Connection", ToastAndroid.BOTTOM);
+    }
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
+
 
   useEffect(() => {
     if (!bookMark) {
@@ -25,7 +43,7 @@ export const BookMarkProvider = (props: React.PropsWithChildren) => {
     }
   }, [])
 
-  return (<BookMarkContext.Provider value={{ bookmark, setBookmark }} {...props} >
+  return (<BookMarkContext.Provider value={{ bookmark, setBookmark  , isConnected }} {...props} >
     {props.children}
   </BookMarkContext.Provider>
   )
