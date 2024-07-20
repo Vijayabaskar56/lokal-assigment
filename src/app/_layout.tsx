@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { TamaguiProvider } from 'tamagui';
 import { useColorScheme } from 'react-native';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import 'react-native-reanimated';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -17,6 +17,7 @@ import { tamaguiConfig } from '../../tamagui.config'
 import { BookMarkProvider } from '@/store/bookmark-store';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   // tamaguiconfig
@@ -24,9 +25,8 @@ export default function RootLayout() {
     Inter: require('@tamagui/font-inter/otf/Inter-Medium.otf'),
     InterBold: require('@tamagui/font-inter/otf/Inter-Bold.otf'),
   })
-  const currentPath = usePathname();
   // react-query
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
 
   useEffect(() => {
     if (loaded) {

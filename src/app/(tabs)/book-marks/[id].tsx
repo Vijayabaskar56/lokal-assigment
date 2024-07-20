@@ -9,20 +9,12 @@ import Loader from "@/components/Loader";
 const JobDetailsView = () => {
   const { id } = useLocalSearchParams();
   const {bookmark , setBookmark} = useBookMark();
+  let savedJob: any[] = [];
 
-  const { data, isLoading} = useGetJobs();
-  let CurrentJob;
-  if (!isLoading && data) {
-    CurrentJob = data?.pages?.map(page => page.results).flat().filter(jobs => {
-      return jobs.id === parseInt(id as string);
-    });
-  }
-  const job = CurrentJob && CurrentJob[0];
+  savedJob.push(JSON.parse(storage.getString(String(id || "")) as string));
+  const job = savedJob && savedJob[0];
 
-
-  return isLoading
-    ? <Loader />
-    : <JobDetails job={job} bookmark={bookmark} setBookmark={setBookmark} />
+  return <JobDetails job={job} bookmark={bookmark} setBookmark={setBookmark} />
 }
 
 export default JobDetailsView;

@@ -1,10 +1,9 @@
-import { Tabs } from 'expo-router';
+import {  router, Tabs } from 'expo-router';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { accentColor } from '@/utils/utils';
-import { useColorScheme } from 'react-native';
+import { useBookMark } from '@/store/bookmark-store';
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
   return (
     <Tabs
       screenOptions={{
